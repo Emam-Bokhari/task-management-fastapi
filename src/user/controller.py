@@ -19,7 +19,7 @@ def register_user(payload:UserSchema,db:Session):
         )
 
     is_user=db.query(UserModel).filter(UserModel.email==payload.email).first()
-
+    
     if is_user:
         raise HTTPException(
             status_code=400,

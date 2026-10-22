@@ -1,3 +1,5 @@
+import utils.transport
+import utils.session
 from fastapi import FastAPI
 from src.utils.db import Base, engine
 from src.task.router import routes as task_routes
