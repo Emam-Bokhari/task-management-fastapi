@@ -16,3 +16,8 @@ def get_tasks(db=Depends(get_db)):
 @routes.get("/tasks/{task_id}")
 def get_task_by_id(task_id:int,db=Depends(get_db)):
     return controller.get_task_by_id(task_id,db)
+
+@routes.put("/tasks/{task_id}")
+def update_task_by_id(task_id:int,payload:TaskSchema,db=Depends(get_db)):
+    return controller.update_task_by_id(task_id,payload,db)
+
