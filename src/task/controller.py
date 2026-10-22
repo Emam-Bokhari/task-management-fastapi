@@ -64,10 +64,29 @@ def update_task_by_id(task_id:int,payload:TaskSchema,db:Session):
     db.commit()
     db.refresh(task)
 
-
     return{
         "status_code":200,
         "success":True,
         "message":"Task is updated successfully",
         "data":task 
     }
+
+
+def delete_task_by_id(task_id:int,db:Session):
+    task=db.get(Task,task_id)
+
+    if task is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Task is not found"
+        )
+
+    db.delete(task)
+    db.commit()
+
+    return{
+            "status_code":200,
+            "success":True,
+            "message":"Task is deleted successfully",
+            "data":{} 
+        }

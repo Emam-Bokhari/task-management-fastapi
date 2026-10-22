@@ -21,3 +21,7 @@ def get_task_by_id(task_id:int,db=Depends(get_db)):
 def update_task_by_id(task_id:int,payload:TaskSchema,db=Depends(get_db)):
     return controller.update_task_by_id(task_id,payload,db)
 
+@routes.delete("/tasks/{task_id}")
+def delete_task_by_id(task_id:int,db=Depends(get_db)):
+    return controller.delete_task_by_id(task_id,db)
+
