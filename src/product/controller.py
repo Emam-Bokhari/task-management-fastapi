@@ -19,20 +19,11 @@ def create_product(payload:ProductCreate,db:Session):
     db.commit()
     db.refresh(new_product)
 
-    return {
-        "status_code":201,
-        "success":True,
-        "message": "Product is created successfully",
-        "data":new_product
-    }
+    return new_product
 
 
 def get_products(db:Session):
      data=db.scalars(select(Product)).all()
 
-     return send_response(
-          success=True,
-          status_code=200,
-          message="Products data are retrieved successfully",
-          data=data
-     )
+     return data
+

@@ -11,3 +11,10 @@ class ProductUpdate(BaseModel):
     price:int|None = None 
     is_active:bool|None = None 
     is_deleted:bool|None = None 
+
+class ProductResponseSchema(BaseModel):
+    name: str|None = None 
+    description: str|None = None 
+    price:int|None = None 
+    is_active:bool|None = None 
+    is_deleted:bool|None = None 
