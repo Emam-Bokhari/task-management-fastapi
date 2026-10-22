@@ -9,3 +9,7 @@ routes=APIRouter(prefix="/api/v1")
 def create_task(body:TaskSchema,db=Depends(get_db)):
     return controller.create_task(body,db)
 
+@routes.get("/tasks")
+def get_tasks(db=Depends(get_db)):
+    return controller.get_tasks(db)
+

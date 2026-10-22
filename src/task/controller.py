@@ -22,3 +22,14 @@ def create_task(body:TaskSchema,db:Session):
         "message":"Task created successfully",
         "data":new_task
     }
+
+def get_tasks(db:Session):
+
+    data=db.query(Task).all()
+
+    return {
+            "status_code":200,
+            "success":True,
+            "message":"Task created successfully",
+            "data":data
+        }
