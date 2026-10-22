@@ -2,6 +2,7 @@ from src.task.dtos import TaskSchema
 from sqlalchemy.orm import Session
 from src.task.models import Task 
 from fastapi import HTTPException
+from src.utils.send_response import send_response
 
 def create_task(body:TaskSchema,db:Session):
 
@@ -17,23 +18,23 @@ def create_task(body:TaskSchema,db:Session):
     db.commit()
     db.refresh(new_task)
     
-    return {
-        "status_code":200,
-        "success":True,
-        "message":"Task created successfully",
-        "data":new_task
-    }
+    return send_response(
+        success=True,
+        status_code=201,
+        message="Task is created successfully",
+        data=data
+    )
 
 def get_tasks(db:Session):
 
     data=db.query(Task).all()
 
-    return {
-            "status_code":200,
-            "success":True,
-            "message":"Task created successfully",
-            "data":data
-        }
+    return send_response(
+        success=True,
+        status_code=200,
+        message="Task are retrieved successfully",
+        data=data
+    )
 
 def get_task_by_id(task_id:int,db:Session):
 
@@ -41,12 +42,12 @@ def get_task_by_id(task_id:int,db:Session):
     # data=db.query(Task).get(task_id)
     data=db.get(Task,task_id)
 
-    return {
-                "status_code":200,
-                "success":True,
-                "message":"Task created successfully",
-                "data":data
-            }
+    return send_response(
+        success=True,
+        status_code=200,
+        message="Task is retrieved successfully",
+        data=data
+    )
 
 def update_task_by_id(task_id:int,payload:TaskSchema,db:Session):
     task=db.get(Task,task_id)
@@ -64,12 +65,12 @@ def update_task_by_id(task_id:int,payload:TaskSchema,db:Session):
     db.commit()
     db.refresh(task)
 
-    return{
-        "status_code":200,
-        "success":True,
-        "message":"Task is updated successfully",
-        "data":task 
-    }
+    return send_response(
+        success=True,
+        status_code=200,
+        message="Task is updated successfully",
+        data=task
+    )
 
 
 def delete_task_by_id(task_id:int,db:Session):
@@ -84,9 +85,9 @@ def delete_task_by_id(task_id:int,db:Session):
     db.delete(task)
     db.commit()
 
-    return{
-            "status_code":200,
-            "success":True,
-            "message":"Task is deleted successfully",
-            "data":{} 
-        }
+    return send_response(
+        success=True,
+        status_code=200,
+        message="Task is deleted successfully",
+        data={}
+    )
