@@ -33,3 +33,16 @@ def get_tasks(db:Session):
             "message":"Task created successfully",
             "data":data
         }
+
+def get_task_by_id(task_id:int,db:Session):
+
+    # legacy
+    # data=db.query(Task).get(task_id)
+    data=db.get(Task,task_id)
+
+    return {
+                "status_code":200,
+                "success":True,
+                "message":"Task created successfully",
+                "data":data
+            }
