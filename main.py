@@ -1,13 +1,24 @@
 from fastapi import FastAPI
-from src.utils.db import Base, engine
-from src.task.router import routes as task_routes
-from src.product.router import routes as product_routes
-from src.user.router import routes as user_routes
+from app.api.v1.init_routes import init_routes
+from app.core.database import Base, engine
 
-Base.metadata.create_all(engine)
+# Create tables in the database if they do not exist
+Base.metadata.create_all(bind=engine)
 
-app=FastAPI()
+app = FastAPI(
+    title="Task Management API",
+    description="Task Management RESTful API with FastAPI",
+    version="1.0.0",
+)
 
-app.include_router(task_routes)
-app.include_router(product_routes)
-app.include_router(user_routes)
+
+@app.get("/", tags=["Root"])
+def read_root():
+    """Welcome message for API root."""
+    return {
+        "message": "Welcome to the Task Management API. Check out /docs for the interactive API spec!"
+    }
+
+
+# Initialize all routes (v1, and future v2)
+init_routes(app)
