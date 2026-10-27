@@ -1,4 +1,4 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter
 
 from app.api.v1.routes import (
     blog,
@@ -26,9 +26,3 @@ router.include_router(router=task.router, prefix="/task", include_in_schema=Fals
 router.include_router(router=product.router, prefix="/product", include_in_schema=False)
 router.include_router(router=blog.router, prefix="/blog", include_in_schema=False)
 
-
-def init_routes(app: FastAPI):
-    """
-    Register API v1 routes to the given FastAPI application.
-    """
-    app.include_router(router)

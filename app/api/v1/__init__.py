@@ -1,3 +1,4 @@
-from app.api.v1.init_routes import init_routes, router
+from app.api.v1.init_routes import router
 
-__all__ = ["init_routes", "router"]
+__all__ = ["router"]
+

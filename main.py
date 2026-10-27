@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.v1.init_routes import init_routes
+from app.api import init_routes
 from app.core.database import Base, engine
 
 # Create tables in the database if they do not exist
